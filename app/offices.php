@@ -14,4 +14,12 @@ class offices extends Model
     protected $table = 'offices';
 
     protected $fillable = ['user_id', 'content'];
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function users()
+    {
+        return $this->hasMany('App/User');
+    }
 }
