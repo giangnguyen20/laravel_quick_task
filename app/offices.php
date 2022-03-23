@@ -13,7 +13,10 @@ class offices extends Model
      */
     protected $table = 'offices';
 
-    protected $fillable = ['user_id', 'content'];
+    protected $fillable = [
+        'user_id', 
+        'content'
+    ];
 
     /**
      * Get the comments for the blog post.
