@@ -16,7 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'isActive', 'username', 'email', 'password',
+        'first_name', 
+        'last_name', 
+        'isActive', 
+        'username', 
+        'email', 
+        'password',
     ];
 
     /**
@@ -25,7 +30,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 
+        'remember_token',
     ];
 
     /**
@@ -40,9 +46,5 @@ class User extends Authenticatable
     public function Office()
     {
         return $this->belongsTo('Office::class');
-    }
-
-    public function getFullNameAttribute($value){
-        return $this->strtoupper($value);
     }
 }

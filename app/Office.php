@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class offices extends Model
+class Office extends Model
 {
    /**
      * The table associated with the model.
@@ -13,10 +13,13 @@ class offices extends Model
      */
     protected $table = 'offices';
 
-    protected $fillable = ['user_id', 'content'];
+    protected $fillable = [
+      'user_id', 
+      'content'
+    ];
 
-    public function Office()
+    public function User()
     {
-        return $this->belongsTo('Office::class');
+        return $this->hasMany('User::class');
     }
 }
