@@ -16,7 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 
+        'last_name', 
+        'isActive', 
+        'username',
+        'email', 
+        'password',
     ];
 
     /**
@@ -36,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function Office()
+    {
+        return $this->belongsTo('Office::class');
+    }
 }
