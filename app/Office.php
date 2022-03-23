@@ -18,8 +18,12 @@ class Office extends Model
       'content'
     ];
 
+    /**
+     * Get the comments for the blog post.
+     */
     public function User()
     {
         return $this->hasMany('User::class');
     }
+
 }

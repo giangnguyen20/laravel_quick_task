@@ -44,16 +44,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get the comments for the blog post.
+     */
     public function Office()
     {
         return $this->belongsTo('Office::class');
     }
-
+  
     public function getFullNameAttribute(){
-    return "{$this->first_name} {$this->last_name}";
+        return "{$this->first_name} {$this->last_name}";
     }
 
     public function setUsernameAttributes($username){
         $this->attributes['username'] = Str::slug($username);
     }
+
 }
