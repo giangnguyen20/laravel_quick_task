@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -46,5 +47,13 @@ class User extends Authenticatable
     public function Office()
     {
         return $this->belongsTo('Office::class');
+    }
+
+    public function getFullNameAttribute(){
+    return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function setUsernameAttributes($username){
+        $this->attributes['username'] = Str::slug($username);
     }
 }
