@@ -18,9 +18,9 @@ class offices extends Model
     /**
      * Get the comments for the blog post.
      */
-    public function users()
+    public function User()
     {
-        return $this->hasMany('App/User');
+        return $this->hasMany('User::class');
     }
 
 }
