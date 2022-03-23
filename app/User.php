@@ -16,7 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'isActive', 'username','email', 'password',
+        'first_name', 
+        'last_name', 
+        'isActive', 
+        'username',
+        'email', 
+        'password',
     ];
 
     /**
@@ -40,8 +45,8 @@ class User extends Authenticatable
     /**
      * Get the comments for the blog post.
      */
-    public function offices()
+    public function Office()
     {
-        return $this->belongsTo('App/offices');
+        return $this->belongsTo('Office::class');
     }
 }
