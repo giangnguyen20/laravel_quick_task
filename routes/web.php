@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('user', UserController::class);
+Route::resource('users', UserController::class);
 
 Route::controller(OfficeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
