@@ -4,6 +4,7 @@ use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\UserController;
 use App\User;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,7 @@ Route::prefix('users')->name('users.')->middleware('checkAdmin')->controller(Use
 });
 
 Route::resource('office', OfficeController::class);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
