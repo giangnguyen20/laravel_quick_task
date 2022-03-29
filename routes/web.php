@@ -20,9 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('users', UserController::class);
-
-Route::controller(OfficeController::class)->group(function () {
+Route::prefix('users')->name('users.')->middleware('checkAdmin')->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/', 'store')->name('store');
     Route::get('/create', 'create')->name('create');
@@ -31,3 +29,5 @@ Route::controller(OfficeController::class)->group(function () {
     Route::put('/{id}', 'update')->name('update');
     Route::delete('/{id}', 'destroy')->name('destroy');
 });
+
+Route::resource('office', OfficeController::class);
