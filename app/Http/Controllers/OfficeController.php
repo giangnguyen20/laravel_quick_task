@@ -13,7 +13,7 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        return 'index OficeController';
+        return view('page.offices_page');
     }
 
     /**
