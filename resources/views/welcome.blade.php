@@ -81,7 +81,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    chapter1
+                    <a href="{{ route('lang',['lang' => 'vi']) }}">VI</a>
+
+                    <a href="{{ route('lang',['lang' => 'en' ]) }}">EN</a>
                 </div>
 
                 <div class="links">
