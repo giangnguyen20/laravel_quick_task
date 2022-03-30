@@ -36,3 +36,5 @@ Route::resource('office', OfficeController::class);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('lang/{lang}','LangController@changeLang')->name('changeLang');
