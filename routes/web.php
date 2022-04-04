@@ -21,20 +21,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('users')->name('users.')->middleware('checkAdmin')->controller(UserController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/{id}', 'show')->name('show');
-    Route::get('/{id}/edit', 'edit')->name('edit');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
+Route::prefix('users')->name('users.')->middleware('checkAdmin')->group(function () {
+    Route::get('/', 'UserController@index')->name('index');
+    Route::post('/', 'UserController@store')->name('store');
+    Route::get('/create', 'UserController@create')->name('create');
+    Route::get('/{id}', 'UserController@show')->name('show');
+    Route::get('/{id}/edit', 'UserController@edit')->name('edit');
+    Route::put('/{id}', 'UserController@update')->name('update');
+    Route::delete('/{id}', 'UserController@destroy')->name('destroy');
 });
 
-Route::resource('office', OfficeController::class);
+Route::resource('office', 'OfficeController');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('lang/{lang}','LangController@changeLang')->name('changeLang');
+Route::get('lang/{lang}','LangController@changeLang')->name('lang');
