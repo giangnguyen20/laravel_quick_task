@@ -19,7 +19,7 @@ class LangMiddleware
         if ($lang=$request->session()->get('lang')) {
             App::setLocale($lang);
         }
-        
+
         return $next($request);
     }
 }
