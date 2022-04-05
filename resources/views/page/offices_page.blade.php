@@ -7,10 +7,10 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{{!! route('lang', ['en']) }}">Tiếng anh</a>
+                        <a href="{{!! route('lang', ['en']) }}">En</a>
                     </li>
                     <li>
-                        <a href="{{!! route('lang', ['vi']) }}">Tiếng việt</a>
+                        <a href="{{!! route('lang', ['vi']) }}">vi</a>
                     </li>
                     <li>
                         <a href="#">
@@ -36,14 +36,12 @@
                         <table class="table table-hover table-striped">
                             <thead>
                                 <th>STT</th>
-                                <th>ID</th>
-                                <th>content</th>
+                                <th>Content</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
                                     <td>1</td>
                                     <td>intern PHP</td>
                                     <td><input type="submit" class="btn btn-success" value="Edit"></td>

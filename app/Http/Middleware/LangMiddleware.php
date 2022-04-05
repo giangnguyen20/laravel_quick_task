@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\App;
 
-class CheckAdmin
+class LangMiddleware
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class CheckAdmin
         if ($lang=$request->session()->get('lang')) {
             App::setLocale($lang);
         }
-        
+
         return $next($request);
     }
 }

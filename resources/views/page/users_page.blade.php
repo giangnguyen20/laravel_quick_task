@@ -7,10 +7,10 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{{!! route('lang', ['en']) }}">Tiếng anh</a>
+                        <a href="{{!! route('lang', ['en']) }}">{{__('en')}}</a>
                     </li>
                     <li>
-                        <a href="{{!! route('lang', ['vi']) }}">Tiếng việt</a>
+                        <a href="{{!! route('lang', ['vi']) }}">{{__('vi')}}</a>
                     </li>
                     <li>
                         <a href="#">
@@ -36,8 +36,8 @@
                         <table class="table table-hover table-striped">
                             <thead>
                                 <th>STT</th>
-                                <th>username</th>
-                                <th>email</th>
+                                <th>Username</th>
+                                <th>Email</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </thead>
@@ -56,4 +56,4 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection
