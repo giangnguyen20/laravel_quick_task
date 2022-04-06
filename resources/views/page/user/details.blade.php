@@ -16,7 +16,7 @@
                             <a>
                                 <form action="{{ route('logout') }}" method="post">
                                     @csrf
-                                    <input type="submit" name="logout" value="logout">
+                                    <input type="submit" name="logout" value="{{ __('logout') }}">
                                 </form>
                             </a>
                         </li>
@@ -29,6 +29,11 @@
         <br>
 
         <div class="container-fluid">
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger">{{ __($error) }}</div>
+                @endforeach
+            @endif
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">

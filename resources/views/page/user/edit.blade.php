@@ -33,6 +33,11 @@
                         <div class="content table-responsive table-full-width">
                             <div class="label">
                                 <h3 style="color: black;">{{__('Edit') }}</h3>
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ __($error) }}</div>
+                                    @endforeach
+                                @endif
                                 <p>
                                     @if(empty($mess))
                                         {{__('$mess') }}
