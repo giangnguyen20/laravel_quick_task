@@ -120,7 +120,7 @@ class UserController extends Controller
             $user->delete();
         }
         else{
-            return redirect()->route('users.index')->with('error','not found id');
+            return redirect()->route('users.index')->with('error','not found user');
         }
 
         return redirect()->route('users.index')->with('success','Delete success');

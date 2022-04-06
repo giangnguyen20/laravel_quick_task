@@ -1,16 +1,16 @@
 @extends('page.home')
 
 @section('content')
-    <div class="main-panel" style="position: absolute; top: 0; left: 15%;">
+    <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{!! route('lang', ['en']) }}">{{__('en')}}</a>
+                            <a href="{{ route('lang', ['en']) }}">{{ __('en')}}</a>
                         </li>
                         <li>
-                            <a href="{{!! route('lang', ['vi']) }}">{{__('vi')}}</a>
+                            <a href="{{ route('lang', ['vi']) }}">{{ __('vi')}}</a>
                         </li>
                         <li>
                             <form action="{{ route('logout') }}" method="post">
