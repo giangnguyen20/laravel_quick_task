@@ -7,19 +7,17 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{{!! route('lang', ['en']) }}">En</a>
+                        <a href="{{!! route('lang', ['en']) }}">{{__('en')}}</a>
                     </li>
                     <li>
-                        <a href="{{!! route('lang', ['vi']) }}">vi</a>
+                        <a href="{{!! route('lang', ['vi']) }}">{{__('vi')}}</a>
                     </li>
                     <li>
-                        <a href="#">
-                            <p>giang@gmail.com</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('logout') }}">
-                            <p>Log out</p>
+                        <a>
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <input type="submit" name="logout" value="logout">
+                            </form>
                         </a>
                     </li>
                     <li class="separator hidden-lg hidden-md"></li>
@@ -28,25 +26,41 @@
         </div>
     </nav>
 
+    <br>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="content table-responsive table-full-width">
+                        <a href="{{ route('office.create') }}" class="btn btn-info">{{__('Create') }}</a>
+                        <br>
                         <table class="table table-hover table-striped">
                             <thead>
                                 <th>STT</th>
-                                <th>Content</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>{{__('Username') }}</th>
+                                <th>{{__('Content') }}</th>
+                                <th>{{__('Edit') }}</th>
+                                <th>{{__('Delete') }}</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>intern PHP</td>
-                                    <td><input type="submit" class="btn btn-success" value="Edit"></td>
-                                    <td><input type="submit" class="btn btn-danger" value="Edit"></td>
-                                </tr>
+                                @foreach($offices as $key => $office)
+                                    <tr>
+                                        <td>{{ ($offices->currentpage() - 1) * $offices->perpage() + $key + 1 }}</td>
+                                        <td>{{ $office->username }}</td>
+                                        <td>{{ $office->content }}</td>
+                                        <td>
+                                            <a href="{{ route('office.edit', $office->id) }}" class="btn btn-info"> {{__('Edit') }}</a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('office.destroy', $office->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" id="btn-delete" onclick="return confirm('Are you sure?');" class="btn btn-danger"> <i class="fa fa-remove" aria-hidden="true"></i> {{__('Delete')}}</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
