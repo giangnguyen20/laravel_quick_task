@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Office;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\EditRequest;
@@ -108,5 +109,20 @@ class OfficeController extends Controller
         }
 
         return redirect()->route('office.index')->with('success','Delete success');
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()){
+            $output = '<ul class="list-group">';
+            $user_Name = DB::table('users')->where('username', 'LIKE', '%' . $request->search . '%')->get();
+            if ($user_Name) {
+                foreach ($user_Name as $key => $item) {
+                    $output .= '<option class="list-group-item" value="'.$item->id.'">'.$item->username.'</option>';
+                }
+            }
+
+            return Response($output);
+        }
     }
 }

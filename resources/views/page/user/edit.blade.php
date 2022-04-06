@@ -7,10 +7,10 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{!! route('lang', ['en']) }}">{{__('en')}}</a>
+                            <a href="{{ route('lang', [ 'lang' => 'en']) }}">EN</a>
                         </li>
                         <li>
-                            <a href="{{!! route('lang', ['vi']) }}">{{__('vi')}}</a>
+                            <a href="{{ route('lang', [ 'lang' => 'vi']) }}">VI</a>
                         </li>
                         <li>
                             <form action="{{ route('logout') }}" method="post">
@@ -32,7 +32,7 @@
                     <div class="card">
                         <div class="content table-responsive table-full-width">
                             <div class="label">
-                                <h3 style="color: black;">{{__('Chỉnh sửa') }}</h3>
+                                <h3 style="color: black;">{{__('Edit') }}</h3>
                                 <p>
                                     @if(empty($mess))
                                         {{__('$mess') }}

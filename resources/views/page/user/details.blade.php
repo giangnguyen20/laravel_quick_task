@@ -7,10 +7,10 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{!! route('lang', ['en']) }}">{{__('en')}}</a>
+                            <a href="{{ route('lang', [ 'lang' => 'en']) }}">EN</a>
                         </li>
                         <li>
-                            <a href="{{!! route('lang', ['vi']) }}">{{__('vi')}}</a>
+                            <a href="{{ route('lang', [ 'lang' => 'vi']) }}">VI</a>
                         </li>
                         <li>
                             <a>

@@ -7,16 +7,18 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{ route('lang', ['en']) }}">{{ __('en')}}</a>
+                            <a href="{{ route('lang', ['lang' => 'en']) }}">EN</a>
                         </li>
                         <li>
-                            <a href="{{ route('lang', ['vi']) }}">{{ __('vi')}}</a>
+                            <a href="{{ route('lang', ['lang' => 'vi']) }}">VI</a>
                         </li>
                         <li>
-                            <form action="{{ route('logout') }}" method="post">
-                                @csrf
-                                <input type="submit" name="logout" value="logout">
-                            </form>
+                            <a>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <input type="submit" name="logout" value="{{ __('logout') }}">
+                                </form>
+                            </a>
                         </li>
                         <li class="separator hidden-lg hidden-md"></li>
                     </ul>
@@ -32,28 +34,29 @@
                     <div class="card">
                         <div class="content table-responsive table-full-width">
                             <div class="label">
-                                <h3 style="color: black;">{{__('Thêm mới') }}</h3>
-                                <p>
-                                    @if(empty($mess))
-                                        {{__($mess) }}
-                                    @endif
-                                </p>
+                                <h3 style="color: black;">{{__('New') }}</h3>
                             </div>
                             <form action="{{ route('office.store') }}" method="POST">
                                 @method('POST')
                                 @csrf
                                 <div class="col-span-6 sm:col-span-4">
-                                    <label for="name">{{__('User_id: ') }}</label>
-                                    <input id="name" type="number" class="mt-1 block w-full" name="user_id" autocomplete="first_name" required />
+                                    <div class="list-group">
+                                        <label for="name">{{__('Username ') }}</label>
+                                        <select id="user_list" name="user_id"  class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+
+                                        </select>
+                                        <br>
+                                        search: <input id="username" type="text" class="mt-1 block w-full" name="username" autocomplete="off" required placeholder="search"/>
+                                    </div>
                                 </div>
                                 <br>
                                 <div class="col-span-6 sm:col-span-4">
-                                    <label for="name">{{__('Content: ') }}</label>
-                                    <input id="name" type="text" class="mt-1 block w-full" name="content" autocomplete="last_name" required />
+                                    <label for="name">{{ __('Role') }}: </label>
+                                    <input id="name" type="text" class="mt-1 block w-full" name="content" autocomplete="off" required />
                                 </div>
                                 <br>
                                 <div>
-                                    <input type="submit" value="update"/>
+                                    <input type="submit" value="{{ __('update') }}"/>
                                 </div>
                             </form>
                         </div>
@@ -61,4 +64,31 @@
                 </div>
             </div>
         </div>
+
+
+        <script type="text/javascript">
+            $('#username').on('keyup',function(){
+                $value = $(this).val();
+                if($value){
+                    $.ajax({
+                        type: 'get',
+                        url: '{{ URL::to('search') }}',
+                        data: {
+                            'search': $value
+                        },
+                        success:function(data){
+                            $('#user_list').html(data);
+                        }
+                    });
+                }
+            })
+            $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+
+            $(document).on('click', 'option', function(){
+                console.log($(this).value());
+                var value = $(this).value();
+                $('#username').val(value);
+                $('#user_list').html("");
+            });
+        </script>
 @endsection

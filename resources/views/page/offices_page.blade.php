@@ -7,16 +7,16 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{{ route('lang', ['en']) }}">{{__('en')}}</a>
+                        <a href="{{ route('lang', ['lang' => 'en']) }}">EN</a>
                     </li>
                     <li>
-                        <a href="{{ route('lang', ['vi']) }}">{{__('vi')}}</a>
+                        <a href="{{ route('lang', ['lang' => 'vi']) }}">VI</a>
                     </li>
                     <li>
                         <a>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <input type="submit" name="logout" value="logout">
+                                <input type="submit" name="logout" value="{{ __('logout') }}">
                             </form>
                         </a>
                     </li>
@@ -39,7 +39,7 @@
                             <thead>
                                 <th>STT</th>
                                 <th>{{__('Username') }}</th>
-                                <th>{{__('Content') }}</th>
+                                <th>{{__('Role') }}</th>
                                 <th>{{__('Edit') }}</th>
                                 <th>{{__('Delete') }}</th>
                             </thead>

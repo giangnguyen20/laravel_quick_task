@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LangController;
 use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +33,7 @@ Route::prefix('users')->name('users.')->middleware('checkAdmin')->group(function
 });
 
 Route::resource('office', 'OfficeController');
+Route::get('/search', 'OfficeController@search')->name('search');
 
 Auth::routes();
 
