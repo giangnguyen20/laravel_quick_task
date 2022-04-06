@@ -16,7 +16,7 @@
                         <a>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <input type="submit" name="logout" value="logout">
+                                <input type="submit" name="logout" value="{{ __('logout') }}">
                             </form>
                         </a>
                     </li>
