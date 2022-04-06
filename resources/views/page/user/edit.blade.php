@@ -32,10 +32,10 @@
                     <div class="card">
                         <div class="content table-responsive table-full-width">
                             <div class="label">
-                                <h3 style="color: black;">Chỉnh sửa</h3>
+                                <h3 style="color: black;">{{__('Chỉnh sửa') }}</h3>
                                 <p>
                                     @if(empty($mess))
-                                        echo $mess;
+                                        {{__('$mess') }}
                                     @endif
                                 </p>
                             </div>

@@ -35,7 +35,7 @@
                                 <h3 style="color: black;">Chỉnh sửa</h3>
                                 <p>
                                     @if(isset($mess))
-                                        echo '<p>'.$mess.'</p>';
+                                        {{__($mess) }}
                                     @endif
                                 </p>
                             </div>
