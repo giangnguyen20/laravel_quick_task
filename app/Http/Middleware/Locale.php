@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Support\Facades\App;
+use Illuminate\Contracts\Session\Session;
 
 use Closure;
-use Illuminate\Support\Facades\App;
 
-class LangMiddleware
+class Locale
 {
     /**
      * Handle an incoming request.
@@ -16,10 +17,9 @@ class LangMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($lang=$request->session()->get('lang')) {
-            App::setLocale($request->session()->get('lang'));
+        if (session()->has('locale')) {
+            App::setLocale(session()->get('locale'));
         }
-
         return $next($request);
     }
 }

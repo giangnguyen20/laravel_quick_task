@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Office;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\EditRequest;
+use App\Http\Requests\CreateOfficeRequest;
 
 class OfficeController extends Controller
 {
+    const PAGINATION_NUMBER = 5;
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,13 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        return 'index OficeController';
+        $offices = DB::table('offices')
+            ->join('users', 'users.id', '=', 'offices.user_id')
+            ->select('offices.*', 'users.username')
+            ->orderBy('offices.id', 'desc')
+            ->paginate(self::PAGINATION_NUMBER);
+
+        return view('page.offices_page', compact('offices'));
     }
 
     /**
@@ -23,7 +36,7 @@ class OfficeController extends Controller
      */
     public function create()
     {
-        return 'create Ofice';
+        return view('page.office.create_office');
     }
 
     /**
@@ -32,9 +45,11 @@ class OfficeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOfficeRequest $request)
     {
-        return 'store Ofice';
+        Office::create($request->all());
+
+        return redirect()->route('office.index')->with('success','Create success');
     }
 
     /**
@@ -45,7 +60,7 @@ class OfficeController extends Controller
      */
     public function show($id)
     {
-        return 'show Ofice';
+        return 'office show';
     }
 
     /**
@@ -56,7 +71,9 @@ class OfficeController extends Controller
      */
     public function edit($id)
     {
-        return 'edit Ofice';
+        $office = Office::findOrFail($id);
+
+        return view('page.office.edit', compact('office'));
     }
 
     /**
@@ -66,9 +83,13 @@ class OfficeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditRequest $request, $id)
     {
-        return 'update Ofice';
+        $office = Office::findOrFail($id);
+        $office->content = $request->role;
+        $office->update();
+
+        return redirect()->route('office.edit', $id)->with('success', 'Update success');
     }
 
     /**
@@ -79,6 +100,29 @@ class OfficeController extends Controller
      */
     public function destroy($id)
     {
-        return 'delete Ofice';
+        if(Office::find($id)){
+            $user = Office::find($id);
+            $user->delete();
+        }
+        else{
+            return redirect()->route('office.index')->with('error','not found id');
+        }
+
+        return redirect()->route('office.index')->with('success','Delete success');
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()){
+            $output = '<ul class="list-group">';
+            $user_Name = DB::table('users')->where('username', 'LIKE', '%' . $request->search . '%')->get();
+            if ($user_Name) {
+                foreach ($user_Name as $key => $item) {
+                    $output .= '<option class="list-group-item" value="'.$item->id.'">'.$item->username.'</option>';
+                }
+            }
+
+            return Response($output);
+        }
     }
 }

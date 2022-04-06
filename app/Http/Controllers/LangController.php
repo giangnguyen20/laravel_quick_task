@@ -7,6 +7,7 @@ class LangController extends Controller
         'vi',
         'en',
     ];
+
     public function changeLang(Request $request, $lang)
     {
         if (in_array($lang, $this->langActive)) {

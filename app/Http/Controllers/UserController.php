@@ -2,10 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Office;
 use Illuminate\Http\Request;
+use App\User;
+use App\Http\Requests\EditUserceRequest;
 
 class UserController extends Controller
 {
+    const PAGINATION_NUMBER = 5;
+    protected $user;
+    protected $office;
+
+    public function __construct(User $user, Office $office)
+    {
+        $this->user = $user;
+        $this->office = $office;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +26,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('page.users_page');
+        $users = $this->user::orderBy('id', 'desc')
+            ->paginate(self::PAGINATION_NUMBER);
+
+        return view('page.users_page')->with(compact('users'));
     }
 
     /**
@@ -45,7 +61,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return 'show User';
+        $user = $this->user::findOrFail($id);
+        $office = $this->office::where('user_id', $id);
+
+        return view('page.user.details')->with(compact('user', 'office'));
     }
 
     /**
@@ -56,7 +75,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return 'edit User';
+        $user = $this->user::find($id);
+
+        return view('page.user.edit')->with(compact('user'));
     }
 
     /**
@@ -66,9 +87,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditUserceRequest $request, $id)
     {
-        return 'update User';
+        $user = $this->user::find($id);
+        $mess = '';
+        if(strlen($request->password) >= 6) {
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->username = $request->username;
+            $user->password = $request->password;
+            $user->save();
+
+            $mess = 'update thành công!';
+        }
+        else{
+            $mess = 'Mật khẩu quá ngắn!';
+        }
+
+        return redirect()->route('users.show', $id)->with(compact('mess'));
     }
 
     /**
@@ -79,6 +115,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return 'delete User';
+        if(User::find($id)){
+            $user = User::find($id);
+            $user->delete();
+        }
+        else{
+            return redirect()->route('users.index')->with('error','not found user');
+        }
+
+        return redirect()->route('users.index')->with('success','Delete success');
     }
 }

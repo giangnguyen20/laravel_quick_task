@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LangController;
 use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -27,11 +28,12 @@ Route::prefix('users')->name('users.')->middleware('checkAdmin')->group(function
     Route::get('/create', 'UserController@create')->name('create');
     Route::get('/{id}', 'UserController@show')->name('show');
     Route::get('/{id}/edit', 'UserController@edit')->name('edit');
-    Route::put('/{id}', 'UserController@update')->name('update');
+    Route::post('/{id}', 'UserController@update')->name('update');
     Route::delete('/{id}', 'UserController@destroy')->name('destroy');
 });
 
 Route::resource('office', 'OfficeController');
+Route::get('/search', 'OfficeController@search')->name('search');
 
 Auth::routes();
 
