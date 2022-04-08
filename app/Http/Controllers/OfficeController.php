@@ -47,7 +47,13 @@ class OfficeController extends Controller
      */
     public function store(CreateOfficeRequest $request)
     {
-        Office::create($request->all());
+        $check_user = Office::find($request->user_id);
+        if($check_user){
+            $check_user->content = $request->role;
+            $check_user->update();
+        }else{
+            Office::create($request->all());
+        }
 
         return redirect()->route('office.index')->with('success','Create success');
     }
@@ -58,9 +64,19 @@ class OfficeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        return 'office show';
+        if ($request->ajax()){
+            $output = '';
+            $user_Name = DB::table('users')->where('username', 'LIKE', '%' . $request->search . '%')->get();
+            if ($user_Name) {
+                foreach ($user_Name as $key => $item) {
+                    $output .= '<option class="list-group-item" value="'.$item->id.'">'.$item->username.'</option>';
+                }
+            }
+
+            return Response($output);
+        }
     }
 
     /**
@@ -114,7 +130,7 @@ class OfficeController extends Controller
     public function search(Request $request)
     {
         if ($request->ajax()){
-            $output = '<ul class="list-group">';
+            $output = '';
             $user_Name = DB::table('users')->where('username', 'LIKE', '%' . $request->search . '%')->get();
             if ($user_Name) {
                 foreach ($user_Name as $key => $item) {
