@@ -51,13 +51,13 @@
 
                                         </select>
                                         <br>
-                                        search: <input id="username" type="text" class="mt-1 block w-full" name="username" autocomplete="off" required placeholder="search"/>
+                                        search: <input id="username" type="text" class="mt-1 block w-full" name="username" autocomplete="off" required placeholder="search" />
                                     </div>
                                 </div>
                                 <br>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="name">{{ __('Role') }}: </label>
-                                    <input id="name" type="text" class="mt-1 block w-full" name="content" autocomplete="off" required />
+                                    <input id="name" type="text" class="mt-1 block w-full" name="role" autocomplete="off" required />
                                 </div>
                                 <br>
                                 <div>
@@ -71,29 +71,5 @@
         </div>
 
 
-        <script type="text/javascript">
-            $('#username').on('keyup',function(){
-                $value = $(this).val();
-                if($value){
-                    $.ajax({
-                        type: 'get',
-                        url: '{{ URL::to('search') }}',
-                        data: {
-                            'search': $value
-                        },
-                        success:function(data){
-                            $('#user_list').html(data);
-                        }
-                    });
-                }
-            })
-            $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-
-            $(document).on('click', 'option', function(){
-                console.log($(this).value());
-                var value = $(this).value();
-                $('#username').val(value);
-                $('#user_list').html("");
-            });
-        </script>
+        <script type="text/javascript" src="{{ asset('bower_components/assets/js/search.js') }}"></script>
 @endsection
