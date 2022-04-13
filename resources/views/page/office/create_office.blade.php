@@ -56,7 +56,7 @@
                                 </div>
                                 <br>
                                 <div class="col-span-6 sm:col-span-4">
-                                    <label for="name">{{ __('Role') }}: </label>
+                                    <label for="name">{{ __('Role') }} </label>
                                     <input id="name" type="text" class="mt-1 block w-full" name="role" autocomplete="off" required />
                                 </div>
                                 <br>

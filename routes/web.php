@@ -32,7 +32,7 @@ Route::prefix('users')->name('users.')->middleware('checkAdmin')->group(function
     Route::delete('/{id}', 'UserController@destroy')->name('destroy');
 });
 
-Route::resource('office', 'OfficeController');
+Route::resource('office', 'OfficeController')->middleware('checkAdmin');
 Route::get('/search', 'OfficeController@search')->name('search');
 
 Auth::routes();

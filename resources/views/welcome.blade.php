@@ -69,6 +69,10 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <input type="submit" name="logout" value="{{ __('logout') }}">
+                        </form>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

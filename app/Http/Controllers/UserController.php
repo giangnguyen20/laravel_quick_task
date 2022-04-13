@@ -6,6 +6,7 @@ use App\Office;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\EditUserceRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -90,21 +91,28 @@ class UserController extends Controller
     public function update(EditUserceRequest $request, $id)
     {
         $user = $this->user::find($id);
-        $mess = '';
-        if(strlen($request->password) >= 6) {
+        if (strlen($request->password) == 0){
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->username = $request->username;
-            $user->password = $request->password;
+            $user->isAdmin = $request->isAdmin;
             $user->save();
 
-            $mess = 'update thành công!';
-        }
-        else{
-            $mess = 'Mật khẩu quá ngắn!';
+            return redirect()->route('users.index');
         }
 
-        return redirect()->route('users.show', $id)->with(compact('mess'));
+        if(strlen($request->password) >=6 && $request->password == $request->comfirmpassword){
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->username = $request->username;
+            $user->isAdmin = $request->isAdmin;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            return redirect()->route('users.index');
+        }
+
+        return redirect()->route('users.show', $id);
     }
 
     /**

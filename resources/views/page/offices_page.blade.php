@@ -48,7 +48,7 @@
                                     <tr>
                                         <td>{{ ($offices->currentpage() - 1) * $offices->perpage() + $key + 1 }}</td>
                                         <td>{{ $office->username }}</td>
-                                        <td>{{ $office->content }}</td>
+                                        <td>{{ $office->role }}</td>
                                         <td>
                                             <a href="{{ route('office.edit', $office->id) }}" class="btn btn-info"> {{__('Edit') }}</a>
                                         </td>

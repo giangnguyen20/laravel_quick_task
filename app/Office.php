@@ -14,8 +14,8 @@ class Office extends Model
     protected $table = 'offices';
 
     protected $fillable = [
-        'user_id', 
-        'content'
+        'user_id',
+        'role'
     ];
 
     /**

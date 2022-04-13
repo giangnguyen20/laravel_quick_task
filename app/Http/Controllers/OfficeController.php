@@ -47,13 +47,7 @@ class OfficeController extends Controller
      */
     public function store(CreateOfficeRequest $request)
     {
-        $check_user = Office::find($request->user_id);
-        if($check_user){
-            $check_user->content = $request->role;
-            $check_user->update();
-        }else{
-            Office::create($request->all());
-        }
+        Office::create($request->all());
 
         return redirect()->route('office.index')->with('success','Create success');
     }
@@ -102,7 +96,7 @@ class OfficeController extends Controller
     public function update(EditRequest $request, $id)
     {
         $office = Office::findOrFail($id);
-        $office->content = $request->role;
+        $office->role = $request->role;
         $office->update();
 
         return redirect()->route('office.edit', $id)->with('success', 'Update success');
