@@ -67,7 +67,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('office.index') }}">
+                        <a href="{{ route('offices.index') }}">
                             <i class="pe-7s-note2"></i>
                             <p>{{ __('Office List') }}</p>
                         </a>

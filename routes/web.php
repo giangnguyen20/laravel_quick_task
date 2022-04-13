@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::prefix('users')->name('users.')->middleware('checkAdmin')->group(function () {
     Route::get('/', 'UserController@index')->name('index');
@@ -32,7 +32,7 @@ Route::prefix('users')->name('users.')->middleware('checkAdmin')->group(function
     Route::delete('/{id}', 'UserController@destroy')->name('destroy');
 });
 
-Route::resource('office', 'OfficeController');
+Route::resource('offices', 'OfficeController')->middleware('checkAdmin');
 Route::get('/search', 'OfficeController@search')->name('search');
 
 Auth::routes();

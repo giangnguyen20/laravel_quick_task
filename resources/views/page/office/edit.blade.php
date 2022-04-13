@@ -42,12 +42,12 @@
                                 @endif
                             </div>
 
-                            <form action="{{ route('office.update', $office->id) }}" method="POST">
+                            <form action="{{ route('offices.update', $office->id) }}" method="POST">
                                 @method('PUT')
                                 @csrf
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="name">{{ __('Role') }}</label>
-                                    <input id="content" type="text" class="mt-1 block w-full" name="role" value="{{ $office->content }}" autocomplete="content" required />
+                                    <input id="content" type="text" class="mt-1 block w-full" name="role" value="{{ $office->role }}" autocomplete="content" required />
                                 </div>
                                 <br>
                                 <div>

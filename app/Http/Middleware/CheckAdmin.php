@@ -19,7 +19,7 @@ class CheckAdmin
         if (Auth::user() && Auth::user()->isAdmin) {
             return $next($request);
         }
-        
-        return $next($request);
+
+        return redirect()->route('welcome');
     }
 }

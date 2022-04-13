@@ -62,9 +62,22 @@
                                     <input id="name" type="text" class="mt-1 block w-full" name="username" value="{{ $user->username }}" autocomplete="username" required />
                                 </div>
                                 <br>
+                                <div class="form-group">
+                                    <label>{{ __('Role: ') }}</label>
+                                    <select name="isAdmin" class="form-control">
+                                        <option @if(!$user->isAdmin) selected @endif value="0">{{ __('User') }}</option>
+                                        <option @if($user->isAdmin) selected @endif value="1">{{ __('Admin') }}</option>
+                                    </select>
+                                </div>
+                                <br>
                                 <div class="col-span-6 sm:col-span-4">
                                     <label for="name">{{ __('Password: ') }}</label>
-                                    <input id="name" type="password" class="mt-1 block w-full" name="password" autocomplete="password" minlength="6" required />
+                                    <input id="name" type="password" class="mt-1 block w-full" name="password" autocomplete="password" />
+                                </div>
+                                <br>
+                                <div class="col-span-6 sm:col-span-4">
+                                    <label for="name">{{ __('Comfirm Password: ') }}</label>
+                                    <input id="name" type="password" class="mt-1 block w-full" name="comfirmpassword" autocomplete="password" />
                                 </div>
                                 <br>
                                 <div>
