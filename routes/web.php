@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('/');
+})->name('welcome');
 
 Route::prefix('users')->name('users.')->middleware('checkAdmin')->group(function () {
     Route::get('/', 'UserController@index')->name('index');
