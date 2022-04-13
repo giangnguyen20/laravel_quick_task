@@ -41,7 +41,7 @@
                                     @endforeach
                                 @endif
                             </div>
-                            <form action="{{ route('office.store') }}" method="POST">
+                            <form action="{{ route('offices.store') }}" method="POST">
                                 @method('POST')
                                 @csrf
                                 <div class="col-span-6 sm:col-span-4">

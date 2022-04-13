@@ -49,7 +49,7 @@ class OfficeController extends Controller
     {
         Office::create($request->all());
 
-        return redirect()->route('office.index')->with('success','Create success');
+        return redirect()->route('offices.index')->with('success','Create success');
     }
 
     /**
@@ -99,7 +99,7 @@ class OfficeController extends Controller
         $office->role = $request->role;
         $office->update();
 
-        return redirect()->route('office.edit', $id)->with('success', 'Update success');
+        return redirect()->route('offices.edit', $id)->with('success', 'Update success');
     }
 
     /**
@@ -115,10 +115,10 @@ class OfficeController extends Controller
             $user->delete();
         }
         else{
-            return redirect()->route('office.index')->with('error','not found id');
+            return redirect()->route('offices.index')->with('error','not found id');
         }
 
-        return redirect()->route('office.index')->with('success','Delete success');
+        return redirect()->route('offices.index')->with('success','Delete success');
     }
 
     public function search(Request $request)
